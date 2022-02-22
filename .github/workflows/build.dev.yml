@@ -32,8 +32,7 @@ jobs:
           FLEX_POSTGRES_PASSWORD: 1234
           POSTGRES_SERVICE_HOST: localhost
           POSTGRES_SERVICE_PORT: 5432
-      - name: Override Coverage Source Path for Sonar
-        run: sed -i "s/<source>\/home\/runner\/work\/core\/core<\/source>/<source>core<\/source>/g" /home/runner/work/core/core/coverage.xml
+      
       - name: SonarQube Scan
         uses: sonarsource/sonarqube-scan-action@master
         env:
