@@ -1,23 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "E:\\Local Disk(D)\\FlexTock\\TestAPI\\TestAPI\\TestAPI.csproj": {}
+    "D:\\FlexTock\\WebAPI_Core\\WebAPI_Docker\\WebAPI_Docker.csproj": {}
   },
   "projects": {
-    "E:\\Local Disk(D)\\FlexTock\\TestAPI\\TestAPI\\TestAPI.csproj": {
+    "D:\\FlexTock\\WebAPI_Core\\WebAPI_Docker\\WebAPI_Docker.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\Local Disk(D)\\FlexTock\\TestAPI\\TestAPI\\TestAPI.csproj",
-        "projectName": "TestAPI",
-        "projectPath": "E:\\Local Disk(D)\\FlexTock\\TestAPI\\TestAPI\\TestAPI.csproj",
-        "packagesPath": "C:\\Users\\a_aboalella\\.nuget\\packages\\",
-        "outputPath": "E:\\Local Disk(D)\\FlexTock\\TestAPI\\TestAPI\\obj\\",
+        "projectUniqueName": "D:\\FlexTock\\WebAPI_Core\\WebAPI_Docker\\WebAPI_Docker.csproj",
+        "projectName": "WebAPI_Docker",
+        "projectPath": "D:\\FlexTock\\WebAPI_Core\\WebAPI_Docker\\WebAPI_Docker.csproj",
+        "packagesPath": "C:\\Users\\a_abo\\.nuget\\packages\\",
+        "outputPath": "D:\\FlexTock\\WebAPI_Core\\WebAPI_Docker\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-        ],
         "configFilePaths": [
-          "C:\\Users\\a_aboalella\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\a_abo\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -47,9 +44,9 @@
               "target": "Package",
               "version": "[6.0.2, )"
             },
-            "Microsoft.VisualStudio.Azure.Containers.Tools.Targets": {
+            "Newtonsoft.Json": {
               "target": "Package",
-              "version": "[1.14.0, )"
+              "version": "[13.0.1, )"
             },
             "Npgsql": {
               "target": "Package",

@@ -1,8 +1,8 @@
 {
   "Version": 1,
-  "Hash": "2XCYBoeOsUU3UT0eJTA/0iQArx6/LgJTQYUn4kpFN6g=",
-  "Source": "TestAPI",
-  "BasePath": "_content/TestAPI",
+  "Hash": "xNFJorAYHV7nUF8l3JHew1Lqacf5kAsAr6RK809/544=",
+  "Source": "WebAPI_Docker",
+  "BasePath": "_content/WebAPI_Docker",
   "Mode": "Default",
   "ManifestType": "Build",
   "ReferencedProjectsConfiguration": [],

@@ -1,5 +1,5 @@
 {
-  "FilePath": "e:\\Local Disk(D)\\FlexTock\\TestAPI\\TestAPI\\TestAPI.csproj",
+  "FilePath": "c:\\FlexTock\\WebAPI_Core\\WebAPI_Docker\\WebAPI_Docker.csproj",
   "Configuration": {
     "ConfigurationName": "MVC-3.0",
     "LanguageVersion": "6.0",
@@ -16295,7 +16295,7 @@
     ],
     "CSharpLanguageVersion": 1000
   },
-  "RootNamespace": "TestAPI",
+  "RootNamespace": "WebAPI_Docker",
   "Documents": [],
   "SerializationFormat": "0.2"
 }

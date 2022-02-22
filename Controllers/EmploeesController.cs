@@ -1,8 +1,8 @@
-﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Npgsql;
 using System.Data;
-using TestAPI.Models;
+using WebAPI_Docker.Models;
 
 namespace TestAPI.Controllers
 {
@@ -25,7 +25,7 @@ namespace TestAPI.Controllers
             _configurationr = configuration;
         }
 
-        [HttpGet]
+        /*[HttpGet]
         public JsonResult Get()
         {
             string Query = @"Select * From Employee ";
@@ -45,13 +45,13 @@ namespace TestAPI.Controllers
             };
             return new JsonResult(DT);
             //return _emps ;
-        }
+        }*/
         [HttpGet("{id}")]
         public JsonResult Get(int id)
         {
             string Query = @"Select * 
                             From Employee 
-                            Where Employee.id = @id ";
+                            Where id = @id ";
             DataTable DT = new DataTable();
             string sqlDataSource = _configurationr.GetConnectionString("EmployeeAppCon");
             NpgsqlDataReader myReader;
@@ -70,10 +70,10 @@ namespace TestAPI.Controllers
             return new JsonResult(DT);
             //return _emps.FirstOrDefault(x => x.Id == id);
         }
-
-        public Employee Get(string name)
+        [HttpGet]
+        public List<Employee> Get()
         {
-            return _emps.FirstOrDefault(x => x.Name == name);
+            return _emps;
         }
         
         [HttpPost]
