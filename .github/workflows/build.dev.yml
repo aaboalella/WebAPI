@@ -1,0 +1,71 @@
+name: Development -> Push Flexcore Backend to GCP
+
+on:
+  push:
+    branches:
+      - main
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    services:
+          # Label used to access the service container
+          postgres:
+            # Docker Hub image
+            image: postgres
+            # Provide the password for postgres
+            env:
+              POSTGRES_PASSWORD: postgres
+            # Set health checks to wait until postgres has started
+            options: >-
+              --health-cmd pg_isready
+              --health-interval 10s
+              --health-timeout 5s
+              --health-retries 5
+            ports:
+              # Maps tcp port 5432 on service container to the host
+              - 5432:5432
+    steps:
+
+      - uses: actions/checkout@v1  
+        env:
+          FLEX_POSTGRES_USER: postgres
+          FLEX_POSTGRES_PASSWORD: postgres
+          POSTGRES_SERVICE_HOST: localhost
+          POSTGRES_SERVICE_PORT: 5432
+      - name: Override Coverage Source Path for Sonar
+        run: sed -i "s/<source>\/home\/runner\/work\/core\/core<\/source>/<source>core<\/source>/g" /home/runner/work/core/core/coverage.xml
+      - name: SonarQube Scan
+        uses: sonarsource/sonarqube-scan-action@master
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+        with:
+          args: >
+            -Dsonar.projectKey=core_development
+            -Dsonar.python.coverage.reportPaths=coverage.xml
+            -Dsonar.verbose=true
+            -Dsonar.qualitygate.wait=true
+      - name: Docker Build
+        uses: flextock/actions-docker-gcr/build@v1.1
+        with:
+          image: main/core-dev
+
+      - name: Docker Push
+        uses: flextock/actions-docker-gcr/push@v1.1
+        with:
+          image: main/core-dev
+          gcloud_key: ${{ secrets.GCLOUD_SERVICE_KEY }}
+
+      - uses: google-github-actions/setup-gcloud@master
+        with:
+          version: '310.0.0'
+          service_account_key: ${{ secrets.GCLOUD_DEPLOY_RUN }}
+
+      # Deploy the Docker image to the GKE cluster
+      - name: Deploy
+        run: |
+          gcloud run deploy core-dev --quiet --image gcr.io/main/core-dev:latest --project main --region us-central1 --platform managed
+      - name: Google Chat Notification
+        uses: CommonMarvel/google-chat-notification@v1.1.1
+        with:
+          url: ${{ secrets.GOOGLE_CHAT_WEBHOOK }}
