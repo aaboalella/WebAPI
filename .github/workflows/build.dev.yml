@@ -64,7 +64,4 @@ jobs:
       - name: Deploy
         run: |
           gcloud run deploy core-dev --quiet --image gcr.io/test-dotnetcore-342113/core-dev:latest --project test-dotnetcore-342113 --region us-central1 --platform managed
-      - name: Google Chat Notification
-        uses: CommonMarvel/google-chat-notification@v1.1.1
-        with:
-          url: ${{ secrets.GOOGLE_CHAT_WEBHOOK }}
+      
