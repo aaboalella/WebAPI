@@ -10,14 +10,6 @@ jobs:
   
     steps:
 
-      - uses: actions/checkout@v1  
-        env:
-          FLEX_POSTGRES_USER: postgres
-          FLEX_POSTGRES_PASSWORD: 1234
-          POSTGRES_SERVICE_HOST: localhost
-          POSTGRES_SERVICE_PORT: 5432
-      
-      
       - name: SonarQube Scan
         uses: sonarsource/sonarqube-scan-action@master
         env:
