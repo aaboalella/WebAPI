@@ -1,4 +1,4 @@
-name: Development -> Push Flexcore Backend to GCP
+name: Development -> Push dotnet webapi Backend to GCP
 
 on:
   push:
@@ -39,6 +39,12 @@ jobs:
         with:
           dotnet-version: 6.0.x
       
+      - name: Restore dependencies
+        run: dotnet restore
+      
+      - name: Build
+        run: dotnet build --no-restore
+     
       - name: SonarQube Scan
         uses: sonarsource/sonarqube-scan-action@master
         env:
