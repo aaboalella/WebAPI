@@ -6,7 +6,7 @@ using WebAPI_Docker.Models;
 
 namespace TestAPI.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("")]
     [ApiController]
     public class EmployeesController : ControllerBase
     {
@@ -47,9 +47,9 @@ namespace TestAPI.Controllers
             //return _emps ;
         }*/
         [HttpGet("{id}")]
-        public JsonResult Get(int id)
+        public Employee Get(int id)
         {
-            string Query = @"Select * 
+            /*string Query = @"Select * 
                             From Employee 
                             Where id = @id ";
             DataTable DT = new DataTable();
@@ -67,8 +67,8 @@ namespace TestAPI.Controllers
                     myCon.Close();
                 };
             };
-            return new JsonResult(DT);
-            //return _emps.FirstOrDefault(x => x.Id == id);
+            return new JsonResult(DT);*/
+            return _emps.FirstOrDefault(x => x.Id == id);
         }
         [HttpGet]
         public List<Employee> Get()
@@ -77,9 +77,9 @@ namespace TestAPI.Controllers
         }
         
         [HttpPost]
-        public JsonResult Post(Employee emp)
+        public Employee Post(Employee emp)
         {
-            string Query = @"INSERT INTO Employee(Name,Age) values (@Name,@Age);";
+            /*string Query = @"INSERT INTO Employee(Name,Age) values (@Name,@Age);";
             DataTable DT = new DataTable();
             string sqlDataSource = _configurationr.GetConnectionString("EmployeeAppCon");
             NpgsqlDataReader myReader;
@@ -96,15 +96,15 @@ namespace TestAPI.Controllers
                     myCon.Close();
                 };
             };
-            return new JsonResult("Added Successefuly");
-            //_emps.Add(emp);
-            //return emp;
+            return new JsonResult("Added Successefuly");*/
+            _emps.Add(emp);
+            return emp;
         }
         
         [HttpPut]
-        public JsonResult Put(Employee emp)
+        public Employee Put(Employee emp)
         {
-            string Query = @"UPDATE Employee
+           /* string Query = @"UPDATE Employee
                             SET Age  = @Age
                             WHERE id = @id;";
             DataTable DT = new DataTable();
@@ -123,17 +123,17 @@ namespace TestAPI.Controllers
                     myCon.Close();
                 };
             };
-            return new JsonResult("Updated Successfully");
-            //var employee = _emps.FirstOrDefault(x => x.Id == id);
-            //employee.Name = emp.Name;
-            //employee.Age = emp.Age;
-            //return emp;
+            return new JsonResult("Updated Successfully");*/
+            var employee = _emps.FirstOrDefault(x => x.Id == emp.Id);
+            employee.Name = emp.Name;
+            employee.Age = emp.Age;
+            return emp;
         }
         
         [HttpDelete("{id}")]
-        public JsonResult Delete(int id)
+        public Employee Delete(int id)
         {
-            string Query = @"DELETE FROM Employee
+            /*string Query = @"DELETE FROM Employee
                             WHERE id = @id;";
             DataTable DT = new DataTable();
             string sqlDataSource = _configurationr.GetConnectionString("EmployeeAppCon");
@@ -150,10 +150,10 @@ namespace TestAPI.Controllers
                     myCon.Close();
                 };
             };
-            return new JsonResult("Deleted Successfully");
-            //var employee = _emps.FirstOrDefault(x => x.Id == id);
-            //_emps.Remove(employee);
-            //return employee;
+            return new JsonResult("Deleted Successfully");*/
+            var employee = _emps.FirstOrDefault(x => x.Id == id);
+            _emps.Remove(employee);
+            return employee;
         }
     }
 }
