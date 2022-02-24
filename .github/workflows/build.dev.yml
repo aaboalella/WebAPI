@@ -4,6 +4,8 @@ on:
   push:
     branches:
       - main
+env:
+  PACKAGE_PATH: './package'
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -14,7 +16,7 @@ jobs:
             image: postgres
             # Provide the password for postgres
             env:
-              POSTGRES_PASSWORD: root
+              POSTGRES_PASSWORD: postgres
             # Set health checks to wait until postgres has started
             options: >-
               --health-cmd pg_isready
@@ -25,13 +27,17 @@ jobs:
               # Maps tcp port 5432 on service container to the host
               - 5432:5432
     steps:
-
       - uses: actions/checkout@v1  
         env:
           FLEX_POSTGRES_USER: postgres
-          FLEX_POSTGRES_PASSWORD: root
+          FLEX_POSTGRES_PASSWORD: postgres
           POSTGRES_SERVICE_HOST: localhost
           POSTGRES_SERVICE_PORT: 5432
+      - uses: actions/checkout@v2
+      - name: Setup .NET Core SDK
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: 6.0.x
       
       - name: SonarQube Scan
         uses: sonarsource/sonarqube-scan-action@master
@@ -43,6 +49,7 @@ jobs:
             -Dsonar.projectKey=testwebapi_main
             -Dsonar.verbose=true
             -Dsonar.qualitygate.wait=true
+      
       - name: Docker Build
         uses: flextock/actions-docker-gcr/build@v1.1
         with:
