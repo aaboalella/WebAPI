@@ -48,7 +48,7 @@ jobs:
         #uses: flextock/actions-docker-gcr/push@v1.1
         run: |
           docker tag webapi gcr.io/test-dotnetcore-342113/webapi
-          docker push gcr.io/test-dotnetcore-342113/webapi
+          
         with:
           image: test-dotnetcore-342113/webapi
           gcloud_key: ${{ secrets.GCLOUD_SERVICE_KEY }}
