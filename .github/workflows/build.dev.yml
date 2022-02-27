@@ -45,7 +45,9 @@ jobs:
           image: test-dotnetcore-342113/webapi
 
       - name: Docker Push
-        uses: flextock/actions-docker-gcr/push@v1.1
+        #uses: flextock/actions-docker-gcr/push@v1.1
+        run: docker tag webapi gcr.io/test-dotnetcore-342113/webapi
+        run: docker push gcr.io/test-dotnetcore-342113/webapi
         with:
           image: test-dotnetcore-342113/webapi
           gcloud_key: ${{ secrets.GCLOUD_SERVICE_KEY }}
@@ -58,5 +60,6 @@ jobs:
       # Deploy the Docker image to the GKE cluster
       - name: Deploy
         run: |
-          gcloud run deploy webapi --quiet --image gcr.io/test-dotnetcore-342113/webapi:latest --project test-dotnetcore-342113 --region us-central1 --platform managed
+          gcloud run deploy 
 
+#webapi --quiet --image gcr.io/test-dotnetcore-342113/webapi:latest --project test-dotnetcore-342113 --region us-central1 --platform managed
